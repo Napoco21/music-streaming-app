@@ -1,10 +1,14 @@
 <?php 
-	include("includes/handlers/login-handler.php"); 
-	include("includes/handlers/register-handler.php"); 
+	include("includes/config.php");
 	include("includes/classes/Account.php");
 	include("includes/classes/Constants.php");
 
-	$account = new Account();
+    $account = new Account($conn);                   // defined before register handler
+
+	include("includes/handlers/register-handler.php"); 
+	include("includes/handlers/login-handler.php"); 
+
+
 
 	function displayInput($input)     // keeps the field input value on page in case the login is unsuccessful
 	{
@@ -15,11 +19,11 @@
 	}
 
 
- ?>
+?>
 
 
 <!DOCTYPE html>
-<html>
+<html>   
 <head>
 	<title>Login page</title>
 </head>
@@ -30,6 +34,7 @@
 				Login to your account
 			</h2> 
 			<p>
+				<?php echo $account->getError(Constants::$loginFailed); ?>
 				<label for="loginUsername"> Username </label>
 				<input id="loginUsername" name="loginUsername" type="text" required>
 			</p>
@@ -59,12 +64,14 @@
 			</p>
 			<p>
 				<?php echo $account->getError(Constants::$username_length_error); ?>
+				<?php echo $account->getError(Constants::$usernameAlreadyExists); ?>
 				<label for="registerUsername"> Username </label>
 				<input id="registerUsername" name="registerUsername" type="text" value="<?php displayInput('registerUsername') ?>" required>
 			</p>
 			<p>
 				<?php echo $account->getError(Constants::$email_match_error); ?>
 				<?php echo $account->getError(Constants::$email_invalid_error); ?>
+				<?php echo $account->getError(Constants::$emailAlreadyExists); ?>
 				<label for="email"> Email </label>
 				<input id="email" name="email" type="email" value="<?php displayInput('email') ?>" required>
 			</p>

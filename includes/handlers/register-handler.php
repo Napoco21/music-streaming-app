@@ -7,11 +7,17 @@ function sanitizeUsername($input)
 	$input = str_replace(" ", "", $input);
 	return $input;
 }
-function sanitizeString($input)
+function sanitizeName($input)
 {
 	$input = strip_tags($input);
 	$input = str_replace(" ", "", $input);
 	$input = ucfirst($input);
+	return $input;
+}
+function sanitizeEmail($input)
+{
+	$input = strip_tags($input);
+	$input = str_replace(" ", "", $input);
 	return $input;
 }
 function sanitizePassword($input)
@@ -24,21 +30,22 @@ function sanitizePassword($input)
 
 
 
-if(asset($_POST['registerButton']))      //  action follows if the register button is clicked on
+if(isset($_POST['registerButton']))      //  action follows if the register button is clicked on
 {
-	
+
 	$username = sanitizeUsername($_POST['registerUsername']);
-	$firstname = sanitizeString($_POST['firstName']);
-	$lastname = sanitizeString($_POST['lastName']);
-	$email = sanitizeString($_POST['email']);
-	$email_confirm = sanitizeString($_POST['email_confirm']);
+	$firstname = sanitizeName($_POST['firstName']);
+	$lastname = sanitizeName($_POST['lastName']);
+	$email = sanitizeEmail($_POST['email']);
+	$email_confirm = sanitizeEmail($_POST['email_confirm']);
 	$password = sanitizePassword($_POST['registerPassword']);
 	$password_confirm = sanitizePassword($_POST['password_confirm']);
 
 	$noError = $account->register($username, $firstname, $lastname, $email, $email_confirm, $password, $password_confirm);
-	if ($NoError)
+	if($noError == true)
 	{
-		header("Location: index.php");   // redirect to index page if registration is succesful
+		$_SESSION['userLoggedIn'] = $username;
+		header("Location: index.php");   // redirect to index page if registration is successful
 	}
 
 }
