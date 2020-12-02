@@ -1,24 +1,27 @@
-<?php
-include("includes/config.php");
+<?php include("includes/header.php"); ?>
 
-session_destroy();
+<h1 class="pageHeading"> You might also like </h1>
 
-if(isset($_SESSION['userLoggedIn']))
-{
-	$userLoggedIn = $_SESSION['userLoggedIn'];
-}
-else
-{
-	header("Location: register.php");
-}
+<div class="gridViewContainer">
+	<?php 
+		$albumQuery = mysqli_query($conn, "SELECT * FROM albums ORDER BY RAND() LIMIT 10");
 
- ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>index page</title>
-</head>
-<body>
-	What?
-</body>
-</html>
+		while($row = mysqli_fetch_array($albumQuery))
+		{
+			echo "<div class='gridViewItem'>
+				<a href='album.php?id=" . $row['id'] . "'>
+					<img src='" . $row['artworkLocation'] . "'>
+
+					<div class='gridViewInfo'>" . $row['title'] . "</div>
+				</a>
+			</div>";
+		}
+	 ?>
+</div>
+
+
+<?php include("includes/footer.php"); ?>
+
+
+					
+				

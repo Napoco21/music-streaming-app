@@ -1,0 +1,18 @@
+html, body { height: 100%; width: 100%; margin: 0; }
+
+#backgroundImg
+{
+	background-color: #000;
+	background-image: url(../images/background/guitar-1245856.jpg);
+	background-position: center;
+	background-size: cover;
+	display: table;
+	height: 100%;
+	width: 100%;
+}
+
+#text
+{
+	color: white;
+	margin-left: 50px;
+}
