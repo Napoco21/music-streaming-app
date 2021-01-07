@@ -203,7 +203,6 @@ $jsonArray = json_encode($resultArray);
 			currentIndex = currentPlaylist.indexOf(trackId);
 		}
 
-		currentIndex = currentPlaylist.indexOf(trackId);
 		pauseSong();
 
 		$.post("includes/handlers/ajax/getSongJson.php", { songId: trackId }, function(data) {
@@ -223,14 +222,13 @@ $jsonArray = json_encode($resultArray);
 			});
 
 			audioElement.setTrack(track);
-			playSong();
-		});
  
-		if (play)
-		{
-			audioElement.play();
-		}
-		audioElement.play();
+			if (play)
+			{
+				playSong();
+			}
+		});
+
 	}
 
 	function playSong()

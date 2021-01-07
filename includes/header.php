@@ -9,6 +9,7 @@ include("includes/classes/Song.php");
 if(isset($_SESSION['userLoggedIn']))
 {
 	$userLoggedIn = $_SESSION['userLoggedIn'];
+	echo "<script>userLoggedIn = '$userLoggedIn';</script>";
 }
 else
 {
@@ -27,11 +28,6 @@ else
 </head>
 <body>
 
-<!-- 	<script>
-		var audioElement = new Audio();  // creates new instance of Audio class in script.js
-		audioElement.setTrack("assets/sounds/bensound-love.mp3");
-		audioElement.audio.play();
-	</script> -->
 
 
 	<div id="mainContainer">
