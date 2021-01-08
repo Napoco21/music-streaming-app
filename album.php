@@ -1,5 +1,5 @@
 <?php include("includes/includedFiles.php");  
-if(isset($_GET['id']))
+if(isset($_GET['id']))     // if id of the album has been set in the url
 {
 	$albumId = $_GET['id'];
 }
